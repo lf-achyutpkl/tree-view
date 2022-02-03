@@ -39,7 +39,8 @@ function TreeNode(props) {
     <div style={styles.container}>
       <ol id="mainlist" key={"mainList "} style={{ listStyle: "none" }}>
         {data.map((item) => {
-          let description =
+          // Getting inside loop because, in real senario we will fetch the product size from product list and display it.
+          const description =
             (!expandedList[item.id] || item.type === "variant") &&
             getDescription(item);
 

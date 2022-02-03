@@ -15,6 +15,10 @@ const styles = {
     margin: "10px",
   },
 };
+
+/**
+ *  Component to render selected item
+ */
 const SelectedItem = ({ flatList, selectedList }) => {
   const items = selectedList.map((selected) => {
     const selectedItem = flatList.find((data) => {

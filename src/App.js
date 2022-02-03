@@ -147,11 +147,7 @@ const tree = [
 ];
 
 function App() {
-  return (
-    <div>
-      <RenderTree data={tree} />
-    </div>
-  );
+  return <RenderTree data={tree} />;
 }
 
 export default App;

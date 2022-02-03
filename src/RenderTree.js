@@ -51,9 +51,9 @@ function RenderTree({ data }) {
    *  Handle expand press
    */
   const handleExpand = (item) => {
-    if (expandedList.includes(item)) {
+    if (expandedList.includes(item.id)) {
       const filteredList = expandedList.filter((elem) => elem !== item.id);
-      setSelectedList(filteredList);
+      setExpandedList(filteredList);
       return;
     }
 
@@ -62,6 +62,7 @@ function RenderTree({ data }) {
 
   /**
    *  Handle item select. Check if parent is selected then all of its child should be selected.
+   *  And when child is unselected then uncheck parent as well.
    */
   const handleSelect = (node) => {
     let selected = [...selectedList];
@@ -101,7 +102,8 @@ function RenderTree({ data }) {
         // Remove first element because its the parent
         parentsChildren.shift();
 
-        const parentsAllChildrenChecked = parentsChildren.every((child) =>selectedList.includes(child.id)
+        const parentsAllChildrenChecked = parentsChildren.every((child) =>
+          selectedList.includes(child.id)
         );
 
         if (parentsAllChildrenChecked && !selected.includes(parent)) {

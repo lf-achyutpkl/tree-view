@@ -3,9 +3,20 @@ const styles = {
     display: "block",
     marginLeft: '20px',
     fontSize: '0.7em',
+  },
+  listItem: { 
+    cursor: "pointer", 
+    margin: "10px", 
+    paddingTop: 5, 
+    paddingBottom: 5, 
+    width: '100%',
+    userSelect: 'none',
   }
 };
 
+/**
+ *  Render tree item label.
+ */
 function TreeItem({
   item,
   description,
@@ -14,7 +25,7 @@ function TreeItem({
   onChangeSelectList,
 }) {
   return (
-    <li key={`key-${item.id}`} style={{ cursor: "pointer", margin: "10px", paddingTop: 5, paddingBottom: 5, width: '100%'   }}>
+    <li key={`key-${item.id}`} style={styles.listItem}>
       <input
         type={"checkbox"}
         checked={selectedList.includes(item.id)}
