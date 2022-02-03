@@ -101,8 +101,7 @@ function RenderTree({ data }) {
         // Remove first element because its the parent
         parentsChildren.shift();
 
-        const parentsAllChildrenChecked = parentsChildren.every((child) =>
-          selected.includes(child.id)
+        const parentsAllChildrenChecked = parentsChildren.every((child) =>selectedList.includes(child.id)
         );
 
         if (parentsAllChildrenChecked && !selected.includes(parent)) {
