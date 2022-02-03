@@ -5,6 +5,9 @@ import TreeNode from "./TreeNode";
 
 function RenderTree({ data }) {
   const [treeData, setTreeData] = useState(data);
+  
+  // Actually I wanted to convert data structure in Flatlist and work from it to avoid nested loop.
+  // All the operations are done through flatlist however, rendering is still done using nested loop, which can be improved.
   const [flatList, setFlatList] = useState([]);
   const [expandedList, setExpandedList] = useState([]);
   const [selectedList, setSelectedList] = useState([]);
