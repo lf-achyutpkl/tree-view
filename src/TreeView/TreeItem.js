@@ -27,12 +27,13 @@ function TreeItem({
   return (
     <li key={`key-${item.id}`} style={styles.listItem}>
       <input
+        data-testid={`checkbox-${item.id}`}
         type={"checkbox"}
         checked={selectedList.includes(item.id)}
         onChange={() => onChangeSelectList(item)}
       />
 
-      <span onClick={() => onChangeExpandList(item)}>
+      <span data-testid={`treeitem-${item.id}`} onClick={() => onChangeExpandList(item)}>
         <span>{item.name}</span>
         <span style={styles.description}>{description}</span>
       </span>

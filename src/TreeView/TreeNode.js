@@ -26,9 +26,9 @@ function TreeNode(props) {
     }
 
     if (list.length >= 2) {
-      return `${floorToDivisibleByFive(list[0].productSize)} ${
+      return `${floorToDivisibleByFive(list[0].productSize)}+ ${
         list[0].name
-      }, ${floorToDivisibleByFive(list[1].productSize)} ${
+      }, ${floorToDivisibleByFive(list[1].productSize)}+ ${
         list[1].name
       } and more`;
     }

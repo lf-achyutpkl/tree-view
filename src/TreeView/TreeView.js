@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import SelectedItem from "./SelectedItem";
 
 import TreeNode from "./TreeNode";
+import SelectedItem from "./SelectedItem";
 
-function RenderTree({ data }) {
+import formatDataStrcuture from "./utils/formatDataStructure";
+
+function TreeView({ data }) {
   const [treeData, setTreeData] = useState(data);
-  
+
   // Actually I wanted to convert data structure in Flatlist and work from it to avoid nested loop.
   // All the operations are done through flatlist however, rendering is still done using nested loop, which can be improved.
   const [flatList, setFlatList] = useState([]);
@@ -13,42 +15,10 @@ function RenderTree({ data }) {
   const [selectedList, setSelectedList] = useState([]);
 
   useEffect(() => {
-    const treeWithPath = formatDataStrcuture(data);
+    const { treeWithPath, flatList } = formatDataStrcuture(data);
     setTreeData(treeWithPath);
+    setFlatList(flatList);
   }, [data]);
-
-  /**
-   *  This method re-structure data to flat list and set full path of each child.
-   * @param nodes
-   * @returns
-   */
-  const formatDataStrcuture = (nodes) => {
-    const formattedArray = [];
-    const formatOperation = (nodes, parentsPath = null) => {
-      for (const node of nodes) {
-        if (node.id && node.name) {
-          const fullPath = parentsPath
-            ? `${parentsPath}/${node.id}`
-            : `/${node.id}`;
-
-          node["fullPath"] = fullPath;
-
-          formattedArray.push({ ...node });
-
-          // If the node has children, run this function again aganist the children until no more childrens occure
-          if (node.children) {
-            formatOperation(node.children, fullPath);
-          }
-        } else {
-          console.error("Error, incorrect data format provided");
-        }
-      }
-    };
-
-    formatOperation(nodes);
-    setFlatList(formattedArray);
-    return nodes;
-  };
 
   /**
    *  Handle expand press
@@ -82,6 +52,7 @@ function RenderTree({ data }) {
           isSelected
             ? !selected.includes(node.id) && selected.push(node.id)
             : (selected = selected.filter((elem) => elem !== node.id));
+
           if (node.children) {
             CheckOrUncheckAllChildren(node.children);
           }
@@ -106,7 +77,7 @@ function RenderTree({ data }) {
         parentsChildren.shift();
 
         const parentsAllChildrenChecked = parentsChildren.every((child) =>
-          selectedList.includes(child.id)
+          selected.includes(child.id)
         );
 
         if (parentsAllChildrenChecked && !selected.includes(parent)) {
@@ -143,4 +114,4 @@ function RenderTree({ data }) {
   );
 }
 
-export default RenderTree;
+export default TreeView;
