@@ -76,6 +76,7 @@ function TreeView({ data }) {
         // Remove first element because its the parent
         parentsChildren.shift();
 
+        // eslint-disable-next-line no-loop-func
         const parentsAllChildrenChecked = parentsChildren.every((child) =>
           selected.includes(child.id)
         );
